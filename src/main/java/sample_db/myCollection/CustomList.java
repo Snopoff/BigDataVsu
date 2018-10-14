@@ -1,17 +1,16 @@
 package sample_db.myCollection;
 
-public class MyList<T> implements MyIterable<T> {
-    private int INITSIZE = 10;
+public class MyList<T> {
     private Object list[] = new Object[INITSIZE];
     private MyNode head;
     private MyNode tail;
     private int size = 0;
 
     public MyList() {
-        this.INITSIZE = 0;
+        this.size = 0;
     }
 
-    public MyList(Object array[]) {
+    public MyList(T array[]) {
         list = array;
         size = array.length;
     }
