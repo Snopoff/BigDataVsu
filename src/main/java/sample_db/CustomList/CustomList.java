@@ -71,7 +71,7 @@ public class CustomList<T> {
         return node.getValue();
     }
 
-    public void remove(T obj) {
+    public void remove(T obj) {  //remove() method to delete all of the objects, that equals to the given one
         Node node = this.head;
         Node prev = null;
 
@@ -89,13 +89,13 @@ public class CustomList<T> {
 
     }
 
-    public void remove(int index) {
+    public void remove(int index) {  //remove() method for removing 1 element with exact index
         Node<T> node = this.head;
         Node<T> prev = null;
         if(index < size && index >= 0) {  //since our index has to be an integer in [0,size)
             int ind = 0;
             while (ind < index) {
-                ind++;  //else increment to keep looking for
+                ind++;  //increment to keep going through the list
                 prev = node;
                 node = node.getNext();
             }
