@@ -76,11 +76,11 @@ public class CustomList<T> {
         Node prev = null;
 
         while(node != null) {
-            if (node.getValue().equals(obj) && prev == null){ this.head.setNext(this.head.getNext()); this.size--; }  //1st element
+            if (node.getValue().equals(obj) && prev == null){ this.head = this.head.getNext(); this.size--; }  //1st element
 
-            if(node.getValue().equals(obj) && node.getNext() == null){ this.tail = prev; this.size--; }  //last element
+            if(node.getValue().equals(obj) && node.getNext() == null){ this.tail = prev; tail.setNext(null); size--; }  //last element
 
-            if(node.getValue().equals(obj)) { prev = node.getNext(); this.size--; }  //not 1st and not last element
+            if(node.getValue().equals(obj)) { prev.setNext(node.getNext()); this.size--; }  //not 1st and not last element
 
             prev = node;
             node = node.getNext();
@@ -100,8 +100,8 @@ public class CustomList<T> {
                 node = node.getNext();
             }
             if(index == 0) { this.head = this.head.getNext(); this.size--; }
-            else if (index == this.size-1) { this.tail = prev; this.size--; }
-            else if (ind == index) { prev = node.getNext(); this.size--; }
+            else if (index == this.size-1) { this.tail = prev; tail.setNext(null); size--; }
+            else if (ind == index) { prev.setNext(node.getNext()); this.size--; }
         }
         else
             throw new IndexOutOfBoundsException("Wrong index.");  //if index is out of bounds, throw an exception
