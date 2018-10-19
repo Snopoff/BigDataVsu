@@ -1,4 +1,4 @@
-package CustomList;
+package sample_db.CustomList;
 
 public class CustomList<T> {
     private int size = 0;
@@ -6,21 +6,21 @@ public class CustomList<T> {
     private Node<T> tail = null;
 
     public CustomList(T obj) {
-        Node node = new Node<>(obj);  //Create a node with given object
+        Node node = new Node<T>(obj);  //Create a node with given object
         this.head = node;  //set the head of list to this object
         this.tail = head;  //set also the tail because the given object is the 1st element of the list
         this.size++;  //increase the size of list
     }
 
     public CustomList(T[] arr) {
-        Node node = new Node<>(arr[0]);  //create a node for the elements of given array and set it to the 1st element
+        Node node = new Node<T>(arr[0]);  //create a node for the elements of given array and set it to the 1st element
         this.head = node;
         this.tail = node;
         this.size++;
 
         for(int i=1; i<arr.length; i++) {
 
-            node = new Node<>(arr[i]);  //get the new element of array
+            node = new Node<T>(arr[i]);  //get the new element of array
 
             this.tail.setNext(node);  //set a reference for the given element for the last node
             this.tail = node;  //set given element as the last one
@@ -32,12 +32,18 @@ public class CustomList<T> {
     }
 
     public void add(T obj) {
-        Node<T> node = new  Node<>(obj);  //Create a node with given object
+        Node<T> node = new  Node<T>(obj);  //Create a node with given object
 
         tail.setNext(node);  //set a reference for the last node to the new element
         tail = node;  //set new element as the last one in list
 
         size++;  //increase the size
+    }
+
+    public void add(T[] obj) {
+        for(int i=0; i < obj.length; i++) {
+            this.add(obj[i]);
+        }
     }
 
     public boolean contains(T obj) {
@@ -78,9 +84,9 @@ public class CustomList<T> {
         while(node != null) {
             if (node.getValue().equals(obj) && prev == null){ this.head = this.head.getNext(); this.size--; }  //1st element
 
-            if(node.getValue().equals(obj) && node.getNext() == null){ this.tail = prev; tail.setNext(null); size--; }  //last element
+            else if(node.getValue().equals(obj) && node.getNext() == null){ this.tail = prev; tail.setNext(null); size--; }  //last element
 
-            if(node.getValue().equals(obj)) { prev.setNext(node.getNext()); this.size--; }  //not 1st and not last element
+            else if(node.getValue().equals(obj)) { prev.setNext(node.getNext()); this.size--; }  //not 1st and not last element
 
             prev = node;
             node = node.getNext();
@@ -122,4 +128,30 @@ public class CustomList<T> {
         }
         System.out.println("]");
     }
+
+    private class Node<T> {
+        private T value = null;
+        private Node<T> next = null;
+
+        Node(T obj) {
+            setValue(obj);
+        }
+        public T getValue() {
+            return value;
+        }
+
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<T> next) {
+            this.next = next;
+        }
+    }
 }
+
+
