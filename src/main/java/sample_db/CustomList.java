@@ -1,4 +1,4 @@
-package sample_db.CustomList;
+package sample_db;
 
 public class CustomList<T> {
     private int size = 0;
@@ -129,6 +129,49 @@ public class CustomList<T> {
         System.out.println("]");
     }
 
+    public int indexOfElement(T obj) {
+        int ind = 0;
+        if(this.contains(obj)) {
+            Node node = this.head;
+            while(node != null && node.value != obj) {
+                ind++;
+                node = node.getNext();
+            }
+        }else {
+            throw new IndexOutOfBoundsException("Wrong object.");
+        }
+        return ind;
+    }
+
+    public Object[] values() {
+        Object[] val = new Object[this.size];
+        int i = 0;
+        Node node = this.head;
+        while(node != null) {
+            val[i] = node.value;
+            i++;
+            node = node.getNext();
+        }
+        return val;
+    }
+
+    public void change(int index, T newValue) {
+        if (index <= size) {
+
+            Node node = this.head;
+            int i = 0;
+
+            while(i != index) {
+                i++;
+                node = node.getNext();
+            }
+
+            node.setValue(newValue);
+        } else {
+            throw new IndexOutOfBoundsException("Wrong index.");
+        }
+    }
+
     private class Node<T> {
         private T value = null;
         private Node<T> next = null;
@@ -152,6 +195,7 @@ public class CustomList<T> {
             this.next = next;
         }
     }
+
 }
 
 

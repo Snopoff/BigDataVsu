@@ -1,9 +1,11 @@
 package sample_db;
 
-import sample_db.CustomList.CustomList;
-
 public class Main {
     public static void main(String[] args) {
+
+    }
+
+    public void testList() {
         Integer[] arr = {3,1,4};
         CustomList<Integer> list = new CustomList(arr);
 
@@ -15,6 +17,19 @@ public class Main {
         list.add(arr);
         list.print();  //[3, 1, 4, 6, 3, 1, 4]
 
+
+        System.out.println(list.indexOfElement(1));  //1
+
+        Object[] got = list.values();
+
+        for(int i=0; i<got.length; i++) {
+            System.out.print(got[i].toString() + " ");  //3, 1, 4, 6, 3, 1, 4
+        }
+        System.out.println();
+
+        list.change(3, 100);
+        System.out.println("Changed = " + list.get(3));  //Changed = 100
+        list.change(3, 6);  //Change back
 
         Integer intToRemove = 3;
         list.remove(intToRemove);
